@@ -84,13 +84,13 @@ if __name__ == "__main__":
             band_buffer, _ = utils.update_buffer(band_buffer, np.asarray([band_powers]))
             smooth_band_powers = np.mean(band_buffer, axis=0)
 
-            #Assigning the varible to the theta/beta
+            #Assigning the variable to the theta/beta
             theta_beta_ratio = smooth_band_powers[Band.Theta] / smooth_band_powers[Band.Beta]
             #Printing it's value
             print('Theta/Beta Ratio: ', theta_beta_ratio)
             
-            #Track focus time when beta metric < 0.9
-            if theta_beta_ratio < 0.9:
+            #Track focus time when theta_beta_ratio < 0.95
+            if theta_beta_ratio < 0.95: # Change this number based on your theta/beta ratio when you're concentrated vs. distracted
                 if focus_start_time is None:
                     focus_start_time = time.time()  # Start tracking time when focus begins
                 focus_time = time.time() - focus_start_time  # Calculate time spent focused
